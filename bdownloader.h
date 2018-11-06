@@ -6,8 +6,12 @@
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkReply>
+#include <QUrl>
+#include <QDateTime>
 #include <QFile>
-#include <QStringList>
+#include <QDebug>
+#include <QProgressDialog>
+#include <QString>
 
 namespace Ui {
 class bDownloader;
@@ -21,6 +25,8 @@ public:
     explicit bDownloader(QWidget *parent = nullptr);
     ~bDownloader();
 
+
+
 private slots:
     void on_dirBut_clicked();
 
@@ -30,9 +36,18 @@ private slots:
 
     void on_dButton_clicked();
 
+    void startRequest(QUrl url);
+
+    void httpReadyRead();
 
 private:
     Ui::bDownloader *ui;
+    QNetworkAccessManager *manager;
+    QUrl url;
+    QNetworkReply *reply;
+    QProgressDialog *progress;
+    QFile *file;
+    qint64 size;
 
 };
 

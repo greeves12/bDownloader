@@ -4,7 +4,9 @@
 #
 #-------------------------------------------------
 
+QT       += network
 QT       += core gui
+DEFINES  += QT_NO_SSL
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

@@ -1,6 +1,8 @@
 #include "bdownloader.h"
 #include "ui_bdownloader.h"
 #include <QFileDialog>
+#include <QDebug>
+
 
 static QString s;
 static QString g;
@@ -45,14 +47,31 @@ void bDownloader::on_urlLine_textChanged(const QString &arg1)
 
 void bDownloader::on_cButton_clicked()
 {
-
 }
 
 void bDownloader::on_dButton_clicked()
 {
-    QUrl url = QUrl::fromUserInput(ui->urlLine->text());
-    QFileInfo info(url.path());
-    QString name = info.fileName();
+    manager = new QNetworkAccessManager(this);
 
+    url = ui->urlLine->text();
+
+    QFileInfo fileInfo(url.path());
+    QString name = fileInfo.fileName();
+
+    ui->dButton->setEnabled(false);
+
+
+
+
+
+}
+
+void bDownloader::startRequest(QUrl url){
+    reply = manager->get(QNetworkRequest(url));
+
+    connect(reply, SIGNAL(readyRead()), this, SLOT(httpReadyRead()));
+}
+
+void bDownloader::httpReadyRead(){
 
 }
