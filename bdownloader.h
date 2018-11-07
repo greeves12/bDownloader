@@ -40,6 +40,12 @@ private slots:
 
     void httpReadyRead();
 
+    void updateProg(qint64, qint64);
+
+    void httpDownloadFinished();
+
+    void cancelDownload();
+
 private:
     Ui::bDownloader *ui;
     QNetworkAccessManager *manager;
